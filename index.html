@@ -461,6 +461,7 @@
             const messageText = document.getElementById('message-text');
             const closeMessageBox = document.getElementById('close-message-box');
 
+
             // --- Smooth Scroll ---
             const scrollToCta = (event) => {
                  event.preventDefault(); // Prevent default anchor behavior if it were an anchor
@@ -494,10 +495,15 @@
     playButton.classList.add('hidden');
     loadingMessage.classList.remove('hidden');
 
+
+
+    
+
     // Cargar el video en el contenedor
     const videoUrl = 'https://storage.googleapis.com/msgsndr/hH6ptBZoknupPiFehzSV/media/684ad3983b9d007bd92c7717.mp4'; // ← Aquí va tu URL
     const videoElement = document.createElement('video');
     videoElement.src = videoUrl;
+    videoPlaceholder.style.backgroundImage = 'https://storage.googleapis.com/msgsndr/hH6ptBZoknupPiFehzSV/media/67f59b5c3116e6453619fe6d.png';
     videoElement.controls = true;
     videoElement.autoplay = true;
     videoElement.preload = 'auto';
