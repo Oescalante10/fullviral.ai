@@ -188,7 +188,7 @@
                 <p class="text-muted text-center mb-10 text-lg">
                     Mira cómo líderes empresariales latinos están automatizando sus ventas y recuperando su libertad.
                 </p>
-                <div id="video-placeholder" class="relative aspect-video bg-gradient-to-br from-dark-secondary to-dark-tertiary rounded-2xl overflow-hidden shadow-2xl border border-medium">
+                <div id="video-placeholder" class="relative aspect-video bg-gradient-to-br from-dark-secondary to-dark-tertiary rounded-2xl overflow-hidden shadow-2xl border border-medium" style="background-image: url('https://storage.googleapis.com/msgsndr/hH6ptBZoknupPiFehzSV/media/67f59b5c3116e6453619fe6d.png'); background-size: cover; background-position: center;">
                      <button id="play-button" class="absolute inset-0 flex items-center justify-center group cursor-pointer">
                         <div class="w-24 h-24 gradient-button rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
                             <svg class="w-10 h-10 text-light ml-2" fill="currentColor" viewBox="0 0 24 24">
@@ -490,18 +490,27 @@
                  });
             }
 
-            // --- Video Placeholder ---
-            if (playButton && loadingMessage && videoPlaceholder) {
-                playButton.addEventListener('click', () => {
-                    playButton.classList.add('hidden');
-                    loadingMessage.classList.remove('hidden');
-                    // Replace alert with a message box
-                    showMessage('El video se cargará aquí. Por favor, inserta tu URL de video.');
-                    // In a real scenario, you'd load the video player here
-                    // e.g., create an iframe and append it
-                    // For now, it just shows the message box
-                });
-            }
+           playButton.addEventListener('click', () => {
+    playButton.classList.add('hidden');
+    loadingMessage.classList.remove('hidden');
+
+    // Cargar el video en el contenedor
+    const videoUrl = 'https://storage.googleapis.com/msgsndr/hH6ptBZoknupPiFehzSV/media/684ad3983b9d007bd92c7717.mp4'; // ← Aquí va tu URL
+    const videoElement = document.createElement('video');
+    videoElement.src = videoUrl;
+    videoElement.controls = true;
+    videoElement.autoplay = true;
+    videoElement.preload = 'auto';
+    videoElement.style.width = '100%';
+    videoElement.style.borderRadius = '8px';
+
+    // Limpiar el placeholder y agregar el video
+    videoPlaceholder.innerHTML = '';
+    videoPlaceholder.appendChild(videoElement);
+
+    // Ocultar el mensaje de carga
+    loadingMessage.classList.add('hidden');
+});
 
             // --- FAQ Accordion ---
              if (faqContainer) {
