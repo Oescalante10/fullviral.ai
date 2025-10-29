@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viral Auto Landing Page</title>
+    <meta name="description" content="Diseña páginas de destino de alta conversión para la automatización del marketing con IA dirigidas a empresarios latinos." />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Equivalent to bg-[#0a0a0a] */
+            color: #d1d5db; /* Default text color (gray-300) */
+        }
+        /* Style for the fixed navbar */
+        nav {
+            background-color: rgba(26, 26, 26, 0.95); /* Equivalent to bg-[#1a1a1a]/95 */
+            backdrop-filter: blur(4px); /* Equivalent to backdrop-blur-sm */
+            border-bottom: 1px solid #374151; /* Equivalent to border-gray-800 */
+        }
+        /* Gradient text utility */
+        .gradient-text {
+            background-image: linear-gradient(to right, #0066FF, #00D4FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        /* Custom pulse animation */
+        @keyframes pulse-custom {
+          0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: .8;
+            transform: scale(1.03);
+          }
+        }
+        .animate-pulse-custom {
+          animation: pulse-custom 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        /* FAQ Accordion Styles */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1.5rem; /* px-6 */
+        }
+        .faq-answer.open {
+            max-height: 500px; /* Adjust as needed */
+            padding-bottom: 1.25rem; /* pb-5 */
+        }
+        .faq-icon {
+            transition: transform 0.3s ease-in-out;
+            color: #00D4FF;
+        }
+        .faq-icon.open {
+            transform: rotate(180deg);
+        }
+        /* Message Box Styles */
+        #message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #374151; /* gray-700 */
+            color: white;
+            padding: 2rem; /* p-8 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            z-index: 100;
+            text-align: center;
+        }
+         /* Base background colors */
+        .bg-dark-primary { background-color: #0a0a0a; }
+        .bg-dark-secondary { background-color: #1a1a1a; }
+        .bg-dark-tertiary { background-color: #2d2d2d; }
+
+        /* Text colors */
+        .text-light { color: #ffffff; }
+        .text-medium { color: #d1d5db; } /* gray-300 */
+        .text-muted { color: #6b7280; } /* gray-500 */
+        .text-accent { color: #00D4FF; }
+        .text-link-hover { color: #00aaff; } /* Lighter shade for hover */
+
+        /* Border colors */
+        .border-medium { border-color: #374151; } /* gray-700 or gray-800 */
+        .border-accent { border-color: #00D4FF; }
+        .border-accent-light { border-color: rgba(0, 102, 255, 0.3); } /* #0066FF/30 */
+        .border-accent-medium { border-color: rgba(0, 102, 255, 0.5); } /* hover:border-[#0066FF]/50 */
+
+        /* Gradient Button */
+        .gradient-button {
+            background-image: linear-gradient(to right, #0066FF, #00D4FF);
+        }
+        .gradient-button:hover {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); /* Equivalent to hover:shadow-[#00D4FF]/50 */
+        }
+
+        /* Gradient Background */
+        .gradient-bg-light {
+             background-image: linear-gradient(to bottom right, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.1));
+        }
+
+    </style>
+</head>
+<body class="bg-dark-primary text-medium">
+
+    <!-- Message Box Placeholder -->
+    <div id="message-box" class="hidden">
+        <p id="message-text" class="mb-4">Message goes here</p>
+        <button id="close-message-box" class="gradient-button text-light font-semibold px-4 py-2 rounded-md">Cerrar</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">
+                <span class="text-light">Full</span><span class="gradient-text">Viral</span>
+            </div>
+            <button id="nav-cta-button" class="gradient-button text-light px-6 py-2 text-sm font-semibold rounded-full hover:shadow-lg transition-all duration-300">
+                Comenzar Ahora
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-dark-primary to-dark-secondary overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://d64gsuwffb70l.cloudfront.net/68fa3dd3457a959f82361909_1761230348201_13779db9.webp')] bg-cover bg-center opacity-20"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-secondary via-transparent to-transparent"></div>
+            <div class="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-light mb-6 leading-tight">
+                    ¿Cansado de Perseguir <span class="gradient-text">Clientes Manualmente</span> Mientras Tu Competencia Te Supera?
+                </h1>
+                <p class="text-xl md:text-2xl font-semibold text-medium mb-10 leading-relaxed max-w-3xl mx-auto">
+                    Sistema de IA Completo que Transforma Líderes Empresariales Latinos en CEOs con Ventas Automatizadas. Instalación en <span class="text-accent">15–21 Días + Garantía Total de Resultados.</span>
+                </p>
+                <button id="hero-cta-button" class="group relative gradient-button text-light px-10 py-5 text-lg font-bold rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 animate-pulse-custom hover:animate-none">
+                    👉 Descubrir Mi Potencial de Automatización
+                    <span class="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
+                </button>
+                <p class="mt-6 text-sm text-muted">
+                    ⚡ Solo 5 espacios disponibles este mes
+                </p>
+            </div>
+        </section>
+
+        <!-- Social Proof Metrics Section -->
+        <section class="bg-dark-secondary py-16 border-y border-medium">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="gradient-bg-light border border-accent-light rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-accent mb-2">10x</div>
+                        <p class="text-medium">MÁS CLIENTES CALIFICADOS AUTOMÁTICAMENTE</p>
+                    </div>
+                    <div class="gradient-bg-light border border-accent-light rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-accent mb-2">85%</div>
+                        <p class="text-medium">MENOS TIEMPO EN SEGUIMIENTO MANUAL</p>
+                    </div>
+                </div>
+                 <p class="text-center text-muted mt-8">
+                     No son promesas, son resultados. Procesos de IA automatizados trabajando 24/7 para tu negocio.
+                 </p>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="bg-dark-primary py-20">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-light text-center mb-4">
+                    Descubre Cómo <span class="text-accent">Full Viral</span> Transforma Tu Negocio en 15 Días
+                </h2>
+                <p class="text-muted text-center mb-10 text-lg">
+                    Mira cómo líderes empresariales latinos están automatizando sus ventas y recuperando su libertad.
+                </p>
+                <div id="video-placeholder" class="relative aspect-video bg-gradient-to-br from-dark-secondary to-dark-tertiary rounded-2xl overflow-hidden shadow-2xl border border-medium">
+                     <button id="play-button" class="absolute inset-0 flex items-center justify-center group cursor-pointer">
+                        <div class="w-24 h-24 gradient-button rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                            <svg class="w-10 h-10 text-light ml-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="loading-message" class="hidden absolute inset-0 flex items-center justify-center">
+                        <p class="text-light text-xl">Cargando video...</p>
+                        <!-- Add iframe here if needed -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="bg-dark-secondary py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-light mb-6 leading-tight">
+                            De Operador Agotado a <span class="text-accent">CEO Estratégico</span>
+                        </h2>
+                        <p class="text-muted text-lg mb-8">
+                           Full Viral no solo automatiza tareas. Te libera de la operación diaria para que vuelvas a dirigir con visión.
+                        </p>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4 group">
+                                <span class="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">✅</span>
+                                <p class="text-medium text-lg leading-relaxed">Recupera 30+ horas semanales para estrategia y familia</p>
+                            </div>
+                            <div class="flex items-start gap-4 group">
+                                <span class="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">✅</span>
+                                <p class="text-medium text-lg leading-relaxed">Genera leads calificados 24/7 sin perseguir clientes</p>
+                            </div>
+                            <div class="flex items-start gap-4 group">
+                                <span class="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">✅</span>
+                                <p class="text-medium text-lg leading-relaxed">Aumenta tus ventas 300% con seguimiento automatizado perfecto</p>
+                            </div>
+                            <div class="flex items-start gap-4 group">
+                                <span class="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">✅</span>
+                                <p class="text-medium text-lg leading-relaxed">Duerme tranquilo sabiendo que tu negocio trabaja solo</p>
+                            </div>
+                            <div class="flex items-start gap-4 group">
+                                <span class="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform">✅</span>
+                                <p class="text-medium text-lg leading-relaxed">Posiciónate como líder en tu mercado con tecnología avanzada</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://d64gsuwffb70l.cloudfront.net/68fa3dd3457a959f82361909_1761230348999_d31f551c.webp" alt="Empresario exitoso" class="rounded-2xl shadow-2xl border border-medium" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0066FF]/20 to-transparent rounded-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="bg-dark-primary py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="relative order-2 md:order-1">
+                        <img src="https://d64gsuwffb70l.cloudfront.net/68fa3dd3457a959f82361909_1761230350143_b43d88c7.webp" alt="Dashboard de IA" class="rounded-2xl shadow-2xl border border-accent-light" />
+                        <div class="absolute inset-0 gradient-bg-light rounded-2xl"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <h2 class="text-4xl md:text-5xl font-bold text-light mb-6 leading-tight">
+                            Tu Negocio en Piloto Automático: El Ecosistema <span class="text-accent">AI-Driven</span>
+                        </h2>
+                        <p class="text-muted text-lg mb-8">
+                            Todo ocurre dentro de un ecosistema AI-Driven “todo en uno” que conecta campañas, atención y seguimiento. Full Viral combina inteligencia conversacional, anuncios optimizados y CRM automático para que tu negocio crezca sin fricción.
+                        </p>
+                        <div class="space-y-6">
+                            <div class="bg-dark-secondary border border-medium rounded-xl p-5 hover:border-accent-medium transition-all">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-3xl flex-shrink-0">🤖</span>
+                                    <div>
+                                        <h3 class="text-light font-bold text-lg mb-2">IA Conversacional Avanzada</h3>
+                                        <p class="text-muted">Chatbots que hablan como tu mejor vendedor</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="bg-dark-secondary border border-medium rounded-xl p-5 hover:border-accent-medium transition-all">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-3xl flex-shrink-0">📞</span>
+                                    <div>
+                                        <h3 class="text-light font-bold text-lg mb-2">Asistente de Voz IA</h3>
+                                        <p class="text-muted">Califica y agenda prospects automáticamente</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-dark-secondary border border-medium rounded-xl p-5 hover:border-accent-medium transition-all">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-3xl flex-shrink-0">🎯</span>
+                                    <div>
+                                        <h3 class="text-light font-bold text-lg mb-2">Meta Ads Inteligentes</h3>
+                                        <p class="text-muted">Campañas que se optimizan solas para máximo ROI</p>
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="bg-dark-secondary border border-medium rounded-xl p-5 hover:border-accent-medium transition-all">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-3xl flex-shrink-0">⚡</span>
+                                    <div>
+                                        <h3 class="text-light font-bold text-lg mb-2">CRM Automatizado</h3>
+                                        <p class="text-muted">Seguimiento perfecto sin que muevas un dedo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-dark-secondary border border-medium rounded-xl p-5 hover:border-accent-medium transition-all">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-3xl flex-shrink-0">🛡️</span>
+                                    <div>
+                                        <h3 class="text-light font-bold text-lg mb-2">Garantía Total</h3>
+                                        <p class="text-muted">90 días para ver resultados o devolución completa</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Transition Section -->
+        <section class="bg-dark-secondary py-16 border-y border-medium">
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                 <p class="text-medium text-lg">
+                     Estas son las tecnologías líderes que impulsan tu ecosistema automatizado, listas para responder cualquier duda que tengas:
+                 </p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="bg-dark-secondary py-20">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-light text-center mb-4">
+                    Preguntas <span class="text-accent">Frecuentes</span>
+                </h2>
+                <p class="text-muted text-center mb-12 text-lg">
+                    Respuestas claras a tus dudas más importantes
+                </p>
+                <div class="space-y-4" id="faq-container">
+                    <!-- FAQ items -->
+                     <div class="faq-item bg-dark-primary border border-medium rounded-xl overflow-hidden hover:border-accent-medium transition-all">
+                        <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center gap-4">
+                            <span class="text-light font-semibold text-lg">¿Es muy costoso este sistema?</span>
+                            <span class="faq-icon text-2xl">▼</span>
+                        </button>
+                        <div class="faq-answer px-6 text-muted leading-relaxed">
+                           No es un gasto, es la inversión más rentable que harás. Un solo cliente adicional por mes ya paga el sistema completo. Además, tienes garantía total de resultados en 90 días.
+                        </div>
+                    </div>
+                     <div class="faq-item bg-dark-primary border border-medium rounded-xl overflow-hidden hover:border-accent-medium transition-all">
+                        <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center gap-4">
+                            <span class="text-light font-semibold text-lg">¿Toma mucho tiempo implementarlo?</span>
+                            <span class="faq-icon text-2xl">▼</span>
+                        </button>
+                        <div class="faq-answer px-6 text-muted leading-relaxed">
+                           Solo 15–21 días para instalación completa. Nosotros hacemos todo el trabajo técnico. Tú solo necesitas aprobar el contenido y estar disponible para capacitación de 2 horas.
+                        </div>
+                    </div>
+                    <div class="faq-item bg-dark-primary border border-medium rounded-xl overflow-hidden hover:border-accent-medium transition-all">
+                        <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center gap-4">
+                            <span class="text-light font-semibold text-lg">¿Cómo sé que Full Viral es confiable?</span>
+                            <span class="faq-icon text-2xl">▼</span>
+                        </button>
+                        <div class="faq-answer px-6 text-muted leading-relaxed">
+                            Full Viral lleva años especializándose exclusivamente en empresarios latinos en EE.UU. Ofrecemos una sólida garantía de resultados: si no ves mejoras medibles en 90 días, trabajamos contigo para buscar la mejor solución. Nuestro compromiso es tu éxito.
+                        </div>
+                    </div>
+                     <div class="faq-item bg-dark-primary border border-medium rounded-xl overflow-hidden hover:border-accent-medium transition-all">
+                        <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center gap-4">
+                            <span class="text-light font-semibold text-lg">¿Funcionará la IA para mi tipo de negocio específico?</span>
+                            <span class="faq-icon text-2xl">▼</span>
+                        </button>
+                        <div class="faq-answer px-6 text-muted leading-relaxed">
+                            Nuestro sistema se adapta a cualquier industria. Hemos automatizado desde dentistas hasta contratistas, mayoristas hasta tiendas. La IA se entrena específicamente para tu negocio.
+                        </div>
+                    </div>
+                     <div class="faq-item bg-dark-primary border border-medium rounded-xl overflow-hidden hover:border-accent-medium transition-all">
+                        <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center gap-4">
+                            <span class="text-light font-semibold text-lg">¿Podré manejar este sistema avanzado?</span>
+                            <span class="faq-icon text-2xl">▼</span>
+                        </button>
+                        <div class="faq-answer px-6 text-muted leading-relaxed">
+                            Es 100% “hecho para ti”. Una vez instalado, el sistema funciona automáticamente. Solo recibes reportes de resultados y clientes listos para cerrar. No necesitas conocimiento técnico.
+                        </div>
+                    </div>
+                     <div class="faq-item bg-dark-primary border border-medium rounded-xl overflow-hidden hover:border-accent-medium transition-all">
+                        <button class="faq-question w-full px-6 py-5 text-left flex justify-between items-center gap-4">
+                            <span class="text-light font-semibold text-lg">¿Qué pasa si necesito cambios después?</span>
+                            <span class="faq-icon text-2xl">▼</span>
+                        </button>
+                        <div class="faq-answer px-6 text-muted leading-relaxed">
+                           Incluimos 3 meses de soporte ilimitado y ajustes sin costo adicional. Tu éxito es nuestro éxito, por eso te acompañamos en el proceso para asegurar que estés satisfecho.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="final-cta" class="bg-gradient-to-b from-dark-primary to-dark-secondary py-24">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-light mb-6 leading-tight">
+                    Deja de Ser Operador. <span class="text-accent">Conviértete en CEO.</span>
+                </h2>
+                <p class="text-xl text-medium mb-10 leading-relaxed">
+                   Solicita un Análisis Estratégico y descubre el potencial de automatización específico para tu negocio.
+                </p>
+
+                <div id="cta-form-container">
+                     <form id="cta-form" class="max-w-md mx-auto space-y-4 mb-8">
+                        <input type="text" id="name" placeholder="Tu Nombre Completo" class="w-full px-6 py-4 bg-dark-tertiary border border-medium rounded-lg text-light placeholder-muted focus:border-accent focus:outline-none transition-colors" required />
+                        <input type="email" id="email" placeholder="Tu Email" class="w-full px-6 py-4 bg-dark-tertiary border border-medium rounded-lg text-light placeholder-muted focus:border-accent focus:outline-none transition-colors" required />
+                        <input type="tel" id="phone" placeholder="Tu Teléfono" class="w-full px-6 py-4 bg-dark-tertiary border border-medium rounded-lg text-light placeholder-muted focus:border-accent focus:outline-none transition-colors" required />
+                        <button type="submit" class="w-full gradient-button text-light px-10 py-5 text-lg font-bold rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105">
+                             👉 Solicitar Análisis Estratégico
+                        </button>
+                    </form>
+                </div>
+
+                <div id="success-message" class="hidden gradient-bg-light border border-accent rounded-xl p-8 mb-8">
+                    <div class="text-5xl mb-4">✅</div>
+                    <h3 class="text-2xl font-bold text-light mb-2">¡Solicitud Recibida!</h3>
+                    <p class="text-medium">Nos pondremos en contacto contigo en las próximas 24 horas para agendar tu diagnóstico gratuito.</p>
+                </div>
+
+                <p class="text-sm text-muted">
+                    🔒 Tu información está protegida y nunca será compartida
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-primary border-t border-medium py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-1 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-light mb-4">
+                        Full<span class="text-accent">Viral</span>
+                    </h3>
+                    <p class="text-muted text-sm">
+                        Ecosistema AI-Driven de marketing que automatiza tu embudo comercial. Socio estratégico de empresarios latinos.
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-medium pt-8 text-center text-muted text-sm space-y-2">
+                <p>© 2024 Full Viral. Esta página no está afiliada con Facebook/Meta. Los resultados individuales pueden variar. Esta no es una garantía de ingresos específicos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const finalCtaSection = document.getElementById('final-cta');
+            const navCtaButton = document.getElementById('nav-cta-button');
+            const heroCtaButton = document.getElementById('hero-cta-button');
+            const playButton = document.getElementById('play-button');
+            const videoPlaceholder = document.getElementById('video-placeholder');
+            const loadingMessage = document.getElementById('loading-message');
+            const faqContainer = document.getElementById('faq-container');
+            const ctaForm = document.getElementById('cta-form');
+            const ctaFormContainer = document.getElementById('cta-form-container');
+            const successMessage = document.getElementById('success-message');
+            const messageBox = document.getElementById('message-box');
+            const messageText = document.getElementById('message-text');
+            const closeMessageBox = document.getElementById('close-message-box');
+
+            // --- Smooth Scroll ---
+            const scrollToCta = (event) => {
+                 event.preventDefault(); // Prevent default anchor behavior if it were an anchor
+                 if (finalCtaSection) {
+                    finalCtaSection.scrollIntoView({ behavior: 'smooth' });
+                 }
+            };
+
+            if (navCtaButton) {
+                navCtaButton.addEventListener('click', scrollToCta);
+            }
+            if (heroCtaButton) {
+                 heroCtaButton.addEventListener('click', scrollToCta);
+            }
+
+             // --- Message Box ---
+            const showMessage = (text) => {
+                if (messageText && messageBox) {
+                    messageText.textContent = text;
+                    messageBox.classList.remove('hidden');
+                }
+            };
+
+            if (closeMessageBox && messageBox) {
+                 closeMessageBox.addEventListener('click', () => {
+                    messageBox.classList.add('hidden');
+                 });
+            }
+
+            // --- Video Placeholder ---
+            if (playButton && loadingMessage && videoPlaceholder) {
+                playButton.addEventListener('click', () => {
+                    playButton.classList.add('hidden');
+                    loadingMessage.classList.remove('hidden');
+                    // Replace alert with a message box
+                    showMessage('El video se cargará aquí. Por favor, inserta tu URL de video.');
+                    // In a real scenario, you'd load the video player here
+                    // e.g., create an iframe and append it
+                    // For now, it just shows the message box
+                });
+            }
+
+            // --- FAQ Accordion ---
+             if (faqContainer) {
+                 const faqItems = faqContainer.querySelectorAll('.faq-item');
+                 faqItems.forEach((item, index) => {
+                     const questionButton = item.querySelector('.faq-question');
+                     const answerDiv = item.querySelector('.faq-answer');
+                     const iconSpan = item.querySelector('.faq-icon');
+
+                     if (questionButton && answerDiv && iconSpan) {
+                         questionButton.addEventListener('click', () => {
+                             // Close other open items
+                             faqItems.forEach((otherItem, otherIndex) => {
+                                 if (index !== otherIndex) {
+                                     otherItem.querySelector('.faq-answer')?.classList.remove('open');
+                                     otherItem.querySelector('.faq-icon')?.classList.remove('open');
+                                 }
+                             });
+
+                             // Toggle current item
+                             answerDiv.classList.toggle('open');
+                             iconSpan.classList.toggle('open');
+                         });
+                     }
+                 });
+             }
+
+            // --- CTA Form Submission ---
+            if (ctaForm && ctaFormContainer && successMessage) {
+                ctaForm.addEventListener('submit', (event) => {
+                    event.preventDefault(); // Prevent actual form submission
+
+                    const nameInput = ctaForm.querySelector('#name');
+                    const emailInput = ctaForm.querySelector('#email');
+                    const phoneInput = ctaForm.querySelector('#phone');
+
+                    // Basic validation
+                    if (nameInput.value && emailInput.value && phoneInput.value) {
+                         console.log('Form submitted:', {
+                             name: nameInput.value,
+                             email: emailInput.value,
+                             phone: phoneInput.value
+                         });
+
+                         // Hide form and show success message
+                         ctaFormContainer.classList.add('hidden');
+                         successMessage.classList.remove('hidden');
+                     } else {
+                         showMessage('Por favor, completa todos los campos.');
+                     }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
