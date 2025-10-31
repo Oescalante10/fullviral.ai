@@ -115,6 +115,7 @@
   data-resources-url="https://beta.leadconnectorhq.com/chat-widget/loader.js" 
  data-widget-id="672e1704e99a32e730e3982d"   > 
  </script>
+ 
 
 
 <!-- Meta Pixel Code -->
@@ -473,7 +474,6 @@ src="https://www.facebook.com/tr?id=2874775599386223&ev=PageView&noscript=1"
             const videoPlaceholder = document.getElementById('video-placeholder');
             const loadingMessage = document.getElementById('loading-message');
             const faqContainer = document.getElementById('faq-container');
-            const ctaForm = document.getElementById('cta-form');
             const ctaFormContainer = document.getElementById('cta-form-container');
             const successMessage = document.getElementById('success-message');
             const messageBox = document.getElementById('message-box');
@@ -563,33 +563,56 @@ src="https://www.facebook.com/tr?id=2874775599386223&ev=PageView&noscript=1"
                  });
              }
 
-            // --- CTA Form Submission ---
-            if (ctaForm && ctaFormContainer && successMessage) {
-                ctaForm.addEventListener('submit', (event) => {
-                    event.preventDefault(); // Prevent actual form submission
-
-                    const nameInput = ctaForm.querySelector('#name');
-                    const emailInput = ctaForm.querySelector('#email');
-                    const phoneInput = ctaForm.querySelector('#phone');
-
-                    // Basic validation
-                    if (nameInput.value && emailInput.value && phoneInput.value) {
-                         console.log('Form submitted:', {
-                             name: nameInput.value,
-                             email: emailInput.value,
-                             phone: phoneInput.value
-                         });
-
-                         // Hide form and show success message
-                         ctaFormContainer.classList.add('hidden');
-                         successMessage.classList.remove('hidden');
-                     } else {
-                         showMessage('Por favor, completa todos los campos.');
-                     }
-                });
-            }
+            
+            
         });
     </script>
+
+    <script>
+  const webhookURL = 'https://services.leadconnectorhq.com/hooks/hH6ptBZoknupPiFehzSV/webhook-trigger/994a267c-bfef-4fe6-ae71-3e97df68ea74';
+
+  const ctaForm = document.getElementById('cta-form');
+  const ctaFormContainer = document.getElementById('cta-form-container');
+  const successMessage = document.getElementById('success-message');
+
+  ctaForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (name && email && phone) {
+      const payload = {
+        name: name,
+        email: email,
+        phone: phone
+      };
+
+      try {
+        const response = await fetch(webhookURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          ctaFormContainer.classList.add('hidden');
+          successMessage.classList.remove('hidden');
+        } else {
+          alert('Hubo un problema al enviar tu solicitud. Intenta nuevamente.');
+        }
+      } catch (error) {
+        console.error('Error al enviar al webhook:', error);
+        alert('Error de conexión. Verifica tu red o URL del webhook.');
+      }
+    } else {
+      alert('Por favor, completa todos los campos.');
+    }
+  });
+</script>
 </body>
 </html>
 
