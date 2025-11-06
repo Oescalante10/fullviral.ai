@@ -800,7 +800,9 @@ src="https://www.facebook.com/tr?id=2874775599386223&ev=PageView&noscript=1"
         });
 
         if (response.ok) {
-          window.location.href = 'https://ai.fullviral.us/gracias.html';
+          setTimeout(() => {
+            window.location.href = 'gracias.html';
+          }, 500);
         } else {
           alert('Hubo un problema al enviar tu solicitud. Intenta nuevamente.');
         }
