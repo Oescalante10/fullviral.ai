@@ -608,7 +608,7 @@ src="https://www.facebook.com/tr?id=2874775599386223&ev=PageView&noscript=1"
                 </p>
 
                 <div id="cta-form-container">
-                     <form action="https://ai.fullviral.us/gracias.php" id="cta-form" class="max-w-md mx-auto space-y-4 mb-8" method="POST">
+                     <form id="cta-form" class="max-w-md mx-auto space-y-4 mb-8">
                         <input type="text" id="name" placeholder="Tu Nombre Completo" class="w-full px-6 py-4 bg-dark-tertiary border border-medium rounded-lg text-light placeholder-muted focus:border-accent focus:outline-none transition-colors" required />
                         <input type="email" id="email" placeholder="Tu Email" class="w-full px-6 py-4 bg-dark-tertiary border border-medium rounded-lg text-light placeholder-muted focus:border-accent focus:outline-none transition-colors" required />
                         <input type="tel" id="phone" placeholder="Escribe tu numero de WhatsApp (+55 412 324 1269)" class="w-full px-6 py-4 bg-dark-tertiary border border-medium rounded-lg text-light placeholder-muted focus:border-accent focus:outline-none transition-colors" required />
@@ -770,7 +770,7 @@ src="https://www.facebook.com/tr?id=2874775599386223&ev=PageView&noscript=1"
     </script>
 
     <script>
-//  const webhookURL = 'https://services.leadconnectorhq.com/hooks/hH6ptBZoknupPiFehzSV/webhook-trigger/994a267c-bfef-4fe6-ae71-3e97df68ea74'; //
+  const webhookURL = 'https://services.leadconnectorhq.com/hooks/hH6ptBZoknupPiFehzSV/webhook-trigger/994a267c-bfef-4fe6-ae71-3e97df68ea74';
 
   const ctaForm = document.getElementById('cta-form');
   const ctaFormContainer = document.getElementById('cta-form-container');
@@ -798,6 +798,8 @@ src="https://www.facebook.com/tr?id=2874775599386223&ev=PageView&noscript=1"
           },
           body: JSON.stringify(payload)
         });
+
+        window.location.href = 'gracias.html';
 
         if (response.ok) {
           ctaFormContainer.classList.add('hidden');
